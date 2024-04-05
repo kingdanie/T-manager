@@ -1,0 +1,60 @@
+<div class="fixed z-50 inset-0 overflow-auto bg-gray-500 bg-opacity-75" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <!-- Background overlay -->
+    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+
+    <!-- Modal content -->
+    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-lg">
+      <div class="bg-blue-500 p-5 text-white flex justify-between">
+        <div class="font-bold">Task-{{ TaskItem.id }}</div>
+        <div class="flex gap-6">
+          <fa-icon [icon]="faTrash" class="cursor-pointer hover:text-red-500 transition"
+          (click)="deleteModal()"
+          ></fa-icon>
+          <fa-icon [icon]="faTimes"
+          class="cursor-pointer text-red-600 font-bold hover:ring-4 transition"
+          (click)="closeModal()"
+          ></fa-icon>
+         
+        
+        </div>
+      </div>
+
+      <div class="p-6">
+        <div class="mb-6">
+          <h2 class="text-gray-800 text-xl font-bold">{{ TaskItem.title }}</h2>
+        </div>
+
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+          <div class="text-gray-800 bg-gray-100 hover:bg-gray-200 p-1 min-h-[150px]">{{ TaskItem.description }}</div>
+        </div>
+
+        <div class="mb-4 flex gap-3 items-center">
+          <!-- <label class="block text-gray-700 text-sm font-bold">Due Date:</label>    -->
+          <fa-icon [icon]="faCalendarDay" class="cursor-pointer text-blue-500"
+         
+          ></fa-icon>
+          <div class="text-gray-800">{{ TaskItem.dueDate }}</div>
+        </div>
+
+        <div class="mb-10 flex flex-col gap-1">
+          <label class="block text-gray-700 text-sm font-bold">Status:</label>
+          <div 
+            class="text-gray-800 bg-gray-100 py-2 px-5 w-fit rounded-sm"
+          >
+
+            {{ TaskItem.status }}
+          
+        </div>
+        </div>
+
+        <button (click)="editTask()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Edit Task
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

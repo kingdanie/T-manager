@@ -1,0 +1,5 @@
+.kanban-column {
+    @apply bg-slate-50 p-3 overflow-y-auto;
+    max-height: 90vh;
+    min-width: 250px;
+}
