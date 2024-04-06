@@ -1,1 +1,11 @@
-<p>members works!</p>
+<app-page-header [titles]="['People',]"></app-page-header>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-5 p-5">
+    @for (item of [0,1,2,3,4,5,6,7]; track $index) {
+        <div class="bg-gray-100 hover:bg-indigo-500 hover:text-white relative p-5 rounded-2xl flex flex-col justify-center items-center min-h-[250px] group">
+            <div class="absolute top-2 right-2 text-gray-500 px-3 py-1 cursor-pointer hover:bg-red-500 hover:rounded-full group-hover:text-white">X</div>
+            {{item}}
+            <p class="text-gray-800 font-bold group-hover:text-white">User Name</p>
+            <p class="text-gray-500 group-hover:text-white">UI/UX Design</p>
+        </div>
+    }
+</div>
