@@ -40,6 +40,8 @@ dismiss() {
   onSubmit(): void {
     if (this.taskForm.valid) {
       const newTask = this.taskForm.value;
+      // Add the current timestamp to the createdAt property
+      newTask.createdAt = new Date().toISOString();
       this.taskService.addTask(newTask).subscribe(() => {
         // Handle success, reset form, close modal, etc.
         this.taskForm.reset();

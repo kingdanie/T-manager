@@ -41,7 +41,13 @@ export class DashboardComponent {
   loadTasks(): void {
     this.taskService.getTasks().subscribe(tasks => {
       // Filter tasks into different arrays based on status
-      this.latestTasks = tasks.slice(0, 4); // Display the first 5 tasks
+      this.latestTasks = tasks.sort((a, b) => {
+        // Convert createdAt strings to Date objects for comparison
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
+        // Compare the dates
+        return dateB.getTime() - dateA.getTime();
+      }).slice(0, 4); // Display the first 5 tasks
       // console.log(tasks);
     });
   }
