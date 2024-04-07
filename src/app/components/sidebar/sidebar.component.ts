@@ -10,11 +10,11 @@ interface NavBarItem {
 }
 
 @Component({
-  selector: 'app-sidebar',
-  standalone: true,
-  imports: [RouterModule, CommonModule],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+    selector: 'app-sidebar',
+    standalone: true,
+    templateUrl: './sidebar.component.html',
+    styleUrl: './sidebar.component.css',
+    imports: [RouterModule, CommonModule]
 })
 export class SidebarComponent {
 
@@ -27,17 +27,17 @@ export class SidebarComponent {
     },
     {
       label: 'Tasks',
-      icon: '/assets/icons/customer-icon.svg',
+      icon: '/assets/icons/calendar.svg',
       link: '/dashboard/tasks',
     },
     {
       label: 'Members',
-      icon: '/assets/icons/orders-icon.svg',
+      icon: '/assets/icons/members.svg',
       link: '/dashboard/members',
     },
     {
       label: 'Settings',
-      icon: '/assets/icons/transaction-icon.svg',
+      icon: '/assets/icons/settings.svg',
       link: '/dashboard/settings',
     },
     
