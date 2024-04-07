@@ -44,5 +44,6 @@ export class NavbarComponent {
         console.error('Error parsing user data from local storage:', error);
         // Handle parsing error (e.g., clear local storage or display an error message)
       }
-    } }
+    } 
+  }
 }

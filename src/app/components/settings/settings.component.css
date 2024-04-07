@@ -7,9 +7,9 @@
 }
 
 .form-control {
-    @apply bg-gray-100 px-5 py-3 rounded-lg 
+    @apply bg-gray-100 px-5 py-3 rounded-lg cursor-not-allowed
 }
 
 .btn-primary {
-    @apply px-10 py-3 rounded-lg bg-indigo-500 text-white
+    @apply px-10 py-3 rounded-lg bg-indigo-500 text-white cursor-not-allowed
 }
