@@ -17,14 +17,14 @@
             <div class="bg-gray-50 rounded-lg p-10 space-y-3">
                 <div class="flex justify-between">
                     <h3 class="font-semibold">My Tasks</h3>
-                    <a class="text-indigo-700" href="/dashboard/tasks">
+                    <a class="text-blue-700" href="/dashboard/tasks">
                         view All
                     </a>
                 </div>
 
                 <div class="flex gap-3 flex-col">
                     @for (item of latestTasks; track $index) {
-                        <div for="task" class="p-5 bg-white hover:bg-indigo-600 flex justify-between rounded-lg w-full group">
+                        <div for="task" class="p-5 bg-white hover:bg-blue-600 flex justify-between rounded-lg w-full group">
                            <div class="flex gap-x-2">
                                <div class="text-gray-400 group-hover:text-gray-100">
                                    0{{$index + 1}}
@@ -44,7 +44,7 @@
             <div class="bg-gray-50 rounded-lg p-10">
                 <div class="flex justify-between">
                     Activity
-                    <small class="text-indigo-700"> This week</small>
+                    <small class="text-blue-700"> This week</small>
                 </div>
                 <div class="p-5 min-h-[170px] bg-white hover:bg-gray-100 cursor-not-allowed flex items-center justify-center">
                     <h3 class="font-bold text-blue-700">
@@ -77,11 +77,11 @@
                 <div>
                         Member
                 </div>
-                <a class="text-indigo-700" href="/dashboard/members">view All</a>
+                <a class="text-blue-700" href="/dashboard/members">view All</a>
             </div>
             <div class="flex gap-3 flex-col">
                 @for (user of latestUsers; track $index) {
-                    <div class="p-3 bg-white hover:bg-indigo-900 flex rounded-lg w-full gap-x-3 items-center justify-between">
+                    <div class="p-3 bg-white hover:bg-blue-900 flex rounded-lg w-full gap-x-3 items-center justify-between">
 
                         <div class="flex gap-x-2">
                         <div>
