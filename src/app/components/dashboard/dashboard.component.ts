@@ -13,10 +13,20 @@ import { Task } from '../../interfaces/task.model';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-
+  user!: any
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+    const userData = localStorage.getItem('userInfo');
+    if (userData) {
+      try {
+        // Attempt to parse JSON data
+        this.user = JSON.parse(userData);
+        console.log(userData);
+      } catch (error) {
+        console.error('Error parsing user data from local storage:', error);
+      }
+    }
     this.loadTasks();
     this.loadUsers();
 

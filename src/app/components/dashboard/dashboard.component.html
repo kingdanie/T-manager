@@ -46,21 +46,25 @@
                     Activity
                     <small class="text-indigo-700"> This week</small>
                 </div>
-                <div class="p-5 min-h-[170px]">
-                        graph
+                <div class="p-5 min-h-[170px] bg-white hover:bg-gray-100 cursor-not-allowed flex items-center justify-center">
+                    <h3 class="font-bold text-blue-700">
+                         Coming Soon
+                    </h3>
                 </div>
 
             </div>
         </div>
    
     <div class="grid gap-y-5">
-        <div class="flex items-center gap-x-2 bg-gray-50 rounded-lg p-5">
-            <div class="rounded-full p-3 bg-red-300 size-10 flex items-center content-center justify-center text-gray-400"> + </div> 
-            <div>
-                <h3 class="font-bold">
-                    Member's Name
-                </h3>
-                <small>UX/UI Design</small>
+        <div class="flex items-center gap-x-4 bg-gray-50 rounded-lg p-5 max-h-[100px]">
+            <div class="flex items-center gap-x-2">
+                <img class="size-12 rounded-full" src={{user.pic}} alt="">          
+                <div>
+                    <h3 class="font-bold">
+                        {{user.name ?? ''}}
+                    </h3>
+                    <small> {{user.team ?? ''}}</small>
+                </div>
             </div>
             <span class="text-gray-400">></span>
             
