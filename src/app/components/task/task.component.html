@@ -3,6 +3,10 @@
 <div class="task bg-slate-200 hover:bg-slate-300 shadow p-5 my-3 cursor-grab" (click)="viewTask(task)">
     <h3 class="font-bold">{{ task.title }}</h3>
     <p>{{ task.description }}</p>
-    <p>Due Date: {{ task.dueDate  }}</p>
+    <p class="mt-5">          
+      <fa-icon [icon]="faCalendar"
+        class="cursor-pointer text-indigo-400 font-bold hover:ring-4 transition"
+      ></fa-icon> : 
+      <span class="text-sm"> {{ task.dueDate  }}</span></p>
   </div>
   
