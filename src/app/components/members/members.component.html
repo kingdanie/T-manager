@@ -6,11 +6,11 @@
                 <img src="assets/icons/close.svg" class="size-4" alt="" />
             </div>
             
-            <div>
-                {{member.pic}}
+            <div class="mb-3">
+                <img class="size-10 rounded-full" src={{member.pic}} alt="">          
             </div>
             <p class="text-gray-800 font-bold group-hover:text-white"> {{member.name}} </p>
-            <p class="text-gray-500 group-hover:text-white"> {{member.team}}</p>
+            <small class="text-gray-400 group-hover:text-white"> {{member.team}}</small>
         </div>
     }
 </div>
