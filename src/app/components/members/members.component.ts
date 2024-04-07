@@ -22,4 +22,8 @@ export class MembersComponent {
   getUsers () {
     this.taskService.getUsers().subscribe(users => this.members = users)
   }
+
+  deleteUser(userId: string) {
+    this.members = this.members.filter(member => member.id !== userId)
+  }
 }
