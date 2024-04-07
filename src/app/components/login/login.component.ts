@@ -30,8 +30,9 @@ export class LoginComponent {
     // Implement login logic (e.g., authenticate with a backend service)
     if (this.selectedUsername.length > 0 && this.password === 'demo123') {
       this.auth.getUserByUsername(this.selectedUsername).subscribe(response => {
-        if (response && response.length === 1) { // Check for single user response
-          const user = response[0]; // Get the first user object (assuming single user)
+        console.log(response);
+        if (response && response.username) { // Check for single user response
+          const user = response; // Get the first user object (assuming single user)
           localStorage.setItem('userInfo', JSON.stringify(user)); // Store user info in JSON format
           this.router.navigate(['/dashboard']);
         } else {
