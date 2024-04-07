@@ -28,6 +28,10 @@ export class AuthService {
     return of(user);
   }
 
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('userInfo'); 
+  }
+
   logOut() {
     localStorage.removeItem('userInfo');
     this.router.navigate(['/login']);
