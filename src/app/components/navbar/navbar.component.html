@@ -1,15 +1,39 @@
 <div class="p-5 flex justify-between">
     <div class="flex items-center">
-        <span> {{'<<'}} </span>
+        <span> <img src="assets/icons/left-arrow.svg" class="size-8" /></span>
         <input class="p-2 bg-gray-100/85 rounded"  type="text" placeholder="Search for anything"/>
     </div>
 
     <div class="flex gap-3">
-            <div class="rounded-full p-3 border-2 border-gray-400 size-10 flex items-center content-center justify-center text-gray-400"> + </div>
-        <div class="rounded-full p-3 border-2 border-gray-400 size-10 flex items-center content-center justify-center text-gray-400"> + </div>
+            <div matTooltip="Add new task" (click)="createTask()" 
+                class="rounded-full p-3 border-2 border-gray-300 size-10 flex 
+                items-center content-center justify-center text-gray-400 
+                cursor-pointer"
+            >
+                 + 
+            </div>
+
+            <div
+                matTooltip="Notifications"  
+                class="cursor-pointer rounded-full p-3 border-2 border-gray-300 
+                size-10 flex items-center content-center justify-center text-gray-400
+                group"
+            >          
+                <fa-icon [icon]="faBell"
+                    class=" text-gray-400 font-bold hover:ring-4 transition group-hover:cursor-pointer"
+                >
+                </fa-icon>
+            </div>
         
-        <div class="flex items-center">
-            <div class="rounded-full p-3 bg-red-300 size-10 flex items-center content-center justify-center text-gray-400"> + </div> <span class="text-gray-400">></span>
-        </div>
+        <ng-container *ngIf="user">
+            <div mat-button [matMenuTriggerFor]="menu" matTooltip={{user.name}} class="flex items-center">
+                <img class="size-10 rounded-full" src={{user.pic}} alt="">          
+            </div>
+            <mat-menu #menu="matMenu">
+                <a href="/dashboard/settings" mat-menu-item>Settings</a>
+                <button (click)="logUserOut()" mat-menu-item>Logout</button>
+              </mat-menu>
+        </ng-container>
+
     </div>
 </div>
