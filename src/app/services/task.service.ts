@@ -8,6 +8,7 @@ import { Task } from '../interfaces/task.model';
 })
 export class TaskService {
   private apiUrl = 'http://localhost:3000/tasks';
+  private apiUsersUrl = 'http://localhost:3000/users';
 
   
   private _task!: Task;
@@ -19,6 +20,10 @@ export class TaskService {
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.apiUrl+'?_sort=dueDate');
+  }
+
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUsersUrl);
   }
 
 
