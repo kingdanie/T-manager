@@ -18,6 +18,15 @@
       { "id": 16, "title": "Medical Equipment Calibration", "description": "Coordinate with the calibration team for the calibration of medical equipment", "dueDate": "2024-07-10", "status": "Completed" },
       { "id": 17, "title": "Health Education Seminar", "description": "Organize a seminar to educate the community on important health topics", "dueDate": "2024-07-25", "status": "Completed" },
       { "id": 18, "title": "Medical Staff Training Workshop", "description": "Facilitate a workshop for medical staff to enhance their skills", "dueDate": "2024-08-05", "status": "Completed" }
+    ],
+    "users": [
+      {"id": 1, "name": "Olamide Kunle", "team": "UX/UI Design", "pic": ""},
+      {"id": 2, "name": "Igwe Kalu", "team": "UX/UI Design", "pic": ""},
+      {"id": 3, "name": "Hamsa Abdul", "team": "UX/UI Design", "pic": ""},
+      {"id": 4, "name": "Kufre Mitini", "team": "UX/UI Design", "pic": ""},
+      {"id": 5, "name": "Osas Idibia", "team": "UX/UI Design", "pic": ""},
+      {"id": 6, "name": "Preye Timini", "team": "UX/UI Design", "pic": ""},
+      {"id": 7, "name": "Gwen Seahouse", "team": "UX/UI Design", "pic": ""}
     ]
   }
   
