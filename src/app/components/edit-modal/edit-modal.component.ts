@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Task } from '../interfaces/task.model';
-import { ModalService } from '../services/modal.service';
-import { TaskService } from '../services/task.service';
+import { Task } from '../../interfaces/task.model';
+import { ModalService } from '../../services/modal.service';
+import { TaskService } from '../../services/task.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
