@@ -6,12 +6,14 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem,  CdkDrag,
   CdkDropListGroup, } from '@angular/cdk/drag-drop';
 import { TaskComponent } from '../task/task.component';
 import { CommonModule } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-kanban-board',
   standalone: true,
-  imports: [TaskComponent, CdkDropListGroup, CdkDropList, CdkDrag, CommonModule],
+  imports: [TaskComponent, CdkDropListGroup, CdkDropList, CdkDrag, CommonModule, NgSelectModule, FormsModule],
   templateUrl: './kanban-board.component.html',
   styleUrl: './kanban-board.component.css'
 })
@@ -23,12 +25,24 @@ export class KanbanBoardComponent {
 
   constructor(private taskService: TaskService) { }
 
+  statusQuery: string = 'Priority';
   ngOnInit(): void {
     this.loadTasks();
 
     this.taskService.onDataUpdate().subscribe(() => {
       this.loadTasks();
     });
+  }
+
+  filterTasks() {
+    this.loadTasks(); // This reloads all tasks without filtering
+    if (this.statusQuery && this.statusQuery.toLocaleLowerCase() !== "priority") {
+      const filterStatus = this.statusQuery.toLowerCase();
+      this.openTasks = this.openTasks.filter(task => task.priority.toLowerCase() === filterStatus);
+      this.pendingTasks = this.pendingTasks.filter(task => task.priority.toLowerCase() === filterStatus);
+      this.inProgressTasks = this.inProgressTasks.filter(task => task.priority.toLowerCase() === filterStatus);
+      this.completedTasks = this.completedTasks.filter(task => task.priority.toLowerCase() === filterStatus);
+    }
   }
 
   loadTasks(): void {
