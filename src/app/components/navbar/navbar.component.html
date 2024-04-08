@@ -1,7 +1,12 @@
 <div class="p-5 flex justify-between">
-    <div class="flex items-center">
-        <span class="lg:hidden"> <img src="assets/icons/left-arrow.svg" class="size-8" /></span>
-        <input class="p-2 bg-gray-100/85 rounded"  type="text" placeholder="Search for anything"/>
+    <div class="flex items-center gap-5">
+        <fa-icon [icon]="faBars"
+            (click)="toggleMenu()"
+            class=" text-gray-400 font-bold hover:ring-4 transition lg:hidden"
+        >
+        </fa-icon>
+        <!-- <span class="lg:hidden"> <img src="assets/icons/left-arrow.svg" class="size-8" /></span> -->
+        <input class="p-2 hidden md:block bg-gray-100/85 rounded"  type="text" placeholder="Search for anything"/>
     </div>
 
     <div class="flex gap-3">

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { MobilemenuService } from '../../mobilemenu.service';
 
 interface NavBarItem {
   label: string;
@@ -14,11 +16,36 @@ interface NavBarItem {
     standalone: true,
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.css',
-    imports: [RouterModule, CommonModule]
+    imports: [RouterModule, CommonModule, FontAwesomeModule]
 })
 export class SidebarComponent {
+  faTimes = faTimes;
 
+  constructor(private mobileMenuService: MobilemenuService) {}
 
+  isMobileMenu!: boolean;
+
+  ngOnInit() {
+    // Or directly set the initial value from the service
+    // this.isMobileMenu = this.mobileMenuService.isMobileMenuOpen;
+     // Option 1: Subscribe and store the initial value
+     this.mobileMenuService.isMobileMenuOpen$.subscribe(isOpen => {
+      this.isMobileMenu = isOpen;
+    });
+
+    // Option 2: Subscribe and react dynamically (without storing)
+    this.mobileMenuService.isMobileMenuOpen$.subscribe(isOpen => {
+      // Perform actions based on the current isMobileMenuOpen value
+      console.log('Mobile menu open:', isOpen);
+    });
+  }
+  
+
+  toggleSideMenu() {
+    this.mobileMenuService.toggleSideMenu();
+    console.log(this.isMobileMenu)
+    console.log('service state' + this.mobileMenuService.isMobileMenuOpen$.subscribe())
+  }
   navbar_items: NavBarItem[] = [
     {
       label: 'Home',
