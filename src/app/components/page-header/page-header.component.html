@@ -1,5 +1,5 @@
 
-<div class="border-2 border-gray-50 border-x-0 font-bold grid grid-cols-12">
+<div class="border-2 border-gray-50 border-x-0 font-bold grid grid-cols-4 lg:grid-cols-12">
     @for (title of titles; track $index) {
         <h2 class="p-5 border-b-2 cursor-pointer col-span-{{12 / titles.length}}" [class.last-border]="$index === titles.length - 1"
         [class.border-blue-600]="$index === activeIndex" 
