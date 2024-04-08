@@ -4,11 +4,12 @@ import { ModalService } from '../../services/modal.service';
 import { TaskService } from '../../services/task.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCalendar, faCalendarAlt, faExclamation } from '@fortawesome/free-solid-svg-icons';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, MatTooltipModule],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })

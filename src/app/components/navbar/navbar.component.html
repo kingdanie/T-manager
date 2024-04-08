@@ -11,28 +11,28 @@
 
     <div class="flex gap-3">
             <div matTooltip="Add new task" (click)="createTask()" 
-                class="rounded-full p-3 border-2 border-gray-300 size-10 flex 
+                class="rounded-full p-3 border-2 border-gray-200 size-10 flex 
                 items-center content-center justify-center text-gray-400 
-                cursor-pointer"
+                cursor-pointer hover:ring-2"
             >
                  + 
             </div>
 
             <div
                 matTooltip="Notifications"  
-                class="cursor-pointer rounded-full p-3 border-2 border-gray-300 
+                class="cursor-pointer rounded-full p-3 border-2 border-gray-200 
                 size-10 flex items-center content-center justify-center text-gray-400
-                group"
+                group hover:ring-2"
             >          
                 <fa-icon [icon]="faBell"
-                    class=" text-gray-400 font-bold hover:ring-4 transition group-hover:cursor-pointer"
+                    class=" text-gray-400 font-bold transition hover:ring-0 group-hover:cursor-pointer"
                 >
                 </fa-icon>
             </div>
         
         <ng-container *ngIf="user">
             <div mat-button [matMenuTriggerFor]="menu" matTooltip={{user.name}} class="flex items-center">
-                <img class="size-10 rounded-full" src={{user.pic}} alt="">          
+                <img class="size-10 rounded-full hover:ring-2" src={{user.pic}} alt="">          
             </div>
             <mat-menu #menu="matMenu">
                 <a href="/dashboard/settings" mat-menu-item>Settings</a>

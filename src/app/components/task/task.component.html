@@ -10,10 +10,10 @@
         ></fa-icon> : 
         <span class="text-sm"> {{ task.dueDate  }}</span>
       </div>
-      <div class="flex gap-1">
+      <div class="flex gap-1 cursor-pointer">
         @for (i of getExclamationCount(task.priority); track $index) {
-          <fa-icon [icon]="faExclamation" 
-          class="cursor-pointer font-bold hover:ring-4 transition"
+          <fa-icon [icon]="faExclamation" matTooltip="{{ task.priority }}"
+          class="font-bold transition hover:ring-0"
           [class.text-red-500]="task.priority.toLowerCase() === 'urgent'"
           [class.text-yellow-500]="task.priority.toLowerCase() === 'moderate'"
          [class.text-blue-600]="task.priority.toLowerCase() === 'low'"
