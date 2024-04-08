@@ -43,8 +43,13 @@ export class SidebarComponent {
 
   toggleSideMenu() {
     this.mobileMenuService.toggleSideMenu();
-    console.log(this.isMobileMenu)
-    console.log('service state' + this.mobileMenuService.isMobileMenuOpen$.subscribe())
+  }
+
+  CloseSideMenu() {
+    if (this.isMobileMenu == true) {
+      this.mobileMenuService.toggleSideMenu();
+    }
+    
   }
   navbar_items: NavBarItem[] = [
     {

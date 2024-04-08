@@ -37,7 +37,7 @@
         <!-- Sidebar Items -->
         <div class="mt-[41px]">
           <div *ngFor="let item of navbar_items" class="mb-[20px]">
-            <a routerLink="{{ item.link }}" routerLinkActive="active"
+            <a (click)="CloseSideMenu()" routerLink="{{ item.link }}" routerLinkActive="active"
               class="flex items-center text-gray-500 2xl:text-[16px] text-[14px] py-0.5 px-5  hover:bg-blue-100">
               <img src="{{ item.icon }}" routerLinkActive="active-icon" class="sidebar-icon size-6 text-green-500" />
               <h4 class="ml-[11px]">{{ item.label }}</h4>
