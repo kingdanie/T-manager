@@ -1,12 +1,17 @@
-import { Service, inject, signal } from '@angular/core';
+import { Injectable, inject, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../interfaces/task';
 import { LocalStorageService } from './local-storage-service';
 
-@Service()
+@Injectable({
+  providedIn: 'root'
+})
 export class TaskService {
   private http = inject(HttpClient);
   private localStorageService = inject(LocalStorageService);
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   // Private writable signals
   private tasksState = signal<Task[]>([]);
@@ -19,19 +24,28 @@ export class TaskService {
   readonly selectedTask = this.selectedTaskState.asReadonly();
 
   constructor() {
-    if (!localStorage.getItem('tasks')) {
-      this.localStorageService.initializeLocalStorage();
+    // Only interact with localStorage if running in the browser
+    if (this.isBrowser) {
+      if (!localStorage.getItem('tasks')) {
+        this.localStorageService.initializeLocalStorage();
+      }
+      this.loadFromStorage();
     }
-    this.loadFromStorage();
   }
 
   private loadFromStorage(): void {
+    if (!this.isBrowser) return;
+
     this.tasksState.set(JSON.parse(localStorage.getItem('tasks') || '[]'));
     this.usersState.set(JSON.parse(localStorage.getItem('users') || '[]'));
     
     const savedSelection = localStorage.getItem('selectedTask');
     if (savedSelection) {
-      this.selectedTaskState.set(JSON.parse(savedSelection));
+      try {
+        this.selectedTaskState.set(JSON.parse(savedSelection));
+      } catch {
+        this.selectedTaskState.set(null);
+      }
     }
   }
 
@@ -41,7 +55,10 @@ export class TaskService {
     
     const updatedTasks = [...currentTasks, taskWithId];
     this.tasksState.set(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    
+    if (this.isBrowser) {
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    }
     
     return taskWithId;
   }
@@ -51,7 +68,10 @@ export class TaskService {
       task.id === updatedTask.id ? updatedTask : task
     );
     this.tasksState.set(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    
+    if (this.isBrowser) {
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    }
   }
 
   deleteTask(): void {
@@ -62,11 +82,18 @@ export class TaskService {
       (task) => task.id !== currentSelected.id
     );
     this.tasksState.set(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    
+    if (this.isBrowser) {
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      localStorage.removeItem('selectedTask');
+    }
+    this.selectedTaskState.set(null);
   }
 
   selectTask(task: Task): void {
     this.selectedTaskState.set(task);
-    localStorage.setItem('selectedTask', JSON.stringify(task));
+    if (this.isBrowser) {
+      localStorage.setItem('selectedTask', JSON.stringify(task));
+    }
   }
 }
