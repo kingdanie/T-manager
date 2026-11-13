@@ -1,0 +1,29 @@
+<app-page-header [titles]="['Account', 'Basic']"></app-page-header>
+
+<form [formGroup]="settingsForm" (ngSubmit)="onSubmit()" class="space-y-10 p-5 max-w-[500px]">
+  <div class="flex flex-col">
+    <label class="font-bold" for="name">Name:</label>
+    <input readonly type="text" placeholder="Type our name" id="name" formControlName="name" class="bg-gray-100 px-5 py-3 rounded-lg cursor-not-allowed" />
+    @if (settingsForm.get('name')?.invalid && settingsForm.get('name')?.touched) {
+      <div class="text-danger">Name is required.</div>
+    }
+  </div>
+
+  <div class="flex flex-col">
+    <label for="email">Team:</label>
+    <input readonly type="text" id="email" formControlName="email" class="bg-gray-100 px-5 py-3 rounded-lg cursor-not-allowed" />
+    @if (settingsForm.get('email')?.invalid && settingsForm.get('email')?.touched) {
+      <div class="text-danger">Invalid email format.</div>
+    }
+  </div>
+
+  <div class="flex flex-col">
+    <label for="password">Password:</label>
+    <input readonly type="password" id="password" formControlName="password" class="bg-gray-100 px-5 py-3 rounded-lg cursor-not-allowed" />
+    @if (settingsForm.get('password')?.invalid && settingsForm.get('password')?.touched) {
+      <div class="text-danger">Password is required.</div>
+    }
+  </div>
+
+  <button type="submit" [disabled]="!settingsForm.valid" class="btn px-10 py-3 rounded-lg bg-blue-500 text-white cursor-not-allowed">Submit</button>
+</form>

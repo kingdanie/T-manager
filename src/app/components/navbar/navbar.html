@@ -1,0 +1,57 @@
+<div class="p-5 flex justify-between bg-blue-50">
+  <div class="flex items-center gap-5">
+    <div class="lg:hidden">
+      <mat-icon
+        (click)="toggleMenu()"
+        class="text-gray-400 font-bold hover:ring-4 transition cursor-pointer"
+      >
+        menu
+      </mat-icon>
+    </div>
+
+    <input
+      class="p-2 hidden md:block bg-white rounded"
+      type="text"
+      placeholder="Search for anything"
+    />
+  </div>
+
+  <div class="flex gap-3">
+    <div
+      matTooltip="Add new task"
+      (click)="createTask()"
+      class="rounded-full p-1 border-2 border-gray-200 size-10 flex items-center content-center justify-center text-xs cursor-pointer hover:ring-2"
+    >
+      <mat-icon>add</mat-icon>
+    </div>
+
+    <div
+      matTooltip="Notifications"
+      class="cursor-pointer rounded-full p-1 border-2 border-gray-200 size-10 flex items-center content-center justify-center text-gray-400 group hover:ring-2"
+    >
+      <mat-icon class="text-gray-400 font-bold transition hover:ring-0">
+        notifications
+      </mat-icon>
+    </div>
+
+    @if (user) {
+      <div
+        mat-button
+        [matMenuTriggerFor]="menu"
+        [matTooltip]="user.name"
+        class="flex items-center cursor-pointer"
+      >
+        <img
+          class="size-10 rounded-full hover:ring-2"
+          [src]="user.pic"
+          [alt]="user.name"
+        />
+      </div>
+
+      <mat-menu #menu="matMenu">
+        <a routerLink="/dashboard/settings" mat-menu-item>Settings</a>
+        <button (click)="logUserOut()" mat-menu-item>Logout</button>
+      </mat-menu>
+    }
+  </div>
+</div>

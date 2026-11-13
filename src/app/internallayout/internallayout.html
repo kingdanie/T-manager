@@ -1,0 +1,23 @@
+<div class="flex h-screen overflow-y-hidden w-full">
+  <app-sidebar class="absolute lg:sticky lg:left-0 lg:top-0 h-[100%];"></app-sidebar>
+
+  <div class="overflow-y-scroll w-full">
+    <app-navbar class="sticky top-0 z-50"></app-navbar>
+    <div class="h-full overflow-y-auto py-4 text-[#393A4A] px-6 min-h-[80%] 2xl:w-[calc(100vw-250px)] w-full">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  @if (modalService.taskModal) {
+    <app-task-modal></app-task-modal>
+  }
+  @if (modalService.deleteTaskModal) {
+    <app-delete-modal></app-delete-modal>
+  }
+  @if (modalService.createTaskModal) {
+    <app-create-modal></app-create-modal>
+  }
+  @if (modalService.editTaskModal) {
+    <app-edit-modal></app-edit-modal>
+  }
+</div>

@@ -1,0 +1,62 @@
+<!-- Desktop Sidebar -->
+<div class="z-[100] hidden lg:block container bg-[#fff] min-h-[100%] 2xl:w-[250px] lg:w-[12vw] drop-shadow-sm">
+  <!-- User / Logo -->
+  <div class="flex items-center pt-4 px-5">
+    <span class="font-bold text-blue-600 lg:text-lg 2xl:text-2xl">T-Manager</span>
+  </div>
+
+  <button class="lg:hidden absolute top-5 right-5" (click)="toggleSideMenu()">
+    <mat-icon class="text-gray-400 font-bold hover:ring-4 transition cursor-pointer">close</mat-icon>
+  </button>
+
+  <!-- Sidebar Items -->
+  <div class="mt-[41px]">
+    @for (item of navbar_items; track item.link) {
+      <div class="mb-[20px]">
+        <a
+          [routerLink]="item.link"
+          routerLinkActive="active"
+          class="flex items-center text-gray-500 2xl:text-[16px] text-[14px] py-0.5 px-5 hover:bg-blue-100"
+        >
+          <img [src]="item.icon" routerLinkActive="active-icon" class="sidebar-icon size-6 text-green-500" />
+          <h4 class="ml-[11px]">{{ item.label }}</h4>
+        </a>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Mobile Menu -->
+<div
+  class="container fixed lg:hidden bg-[#fff] min-h-[100%] drop-shadow-sm w-full transition-all duration-300"
+  [ngClass]="{
+    'fixed z-50 left-0': isMobileMenu(),
+    'absolute top-0 -left-[100vw] h-full w-full': !isMobileMenu()
+  }"
+>
+  <!-- User / Logo -->
+  <div class="flex items-center pt-4 px-5">
+    <span class="font-bold text-blue-600 text-lg">T-Manager</span>
+  </div>
+
+  <button class="absolute top-5 right-5" (click)="toggleSideMenu()">
+    <mat-icon class="text-gray-400 font-bold hover:ring-4 transition cursor-pointer">close</mat-icon>
+  </button>
+
+  <!-- Sidebar Items -->
+  <div class="mt-[41px]">
+    @for (item of navbar_items; track item.link) {
+      <div class="mb-[20px]">
+        <a
+          (click)="closeSideMenu()"
+          [routerLink]="item.link"
+          routerLinkActive="active"
+          class="flex items-center text-gray-500 2xl:text-[16px] text-[14px] py-0.5 px-5 hover:bg-blue-100"
+        >
+          <img [src]="item.icon" routerLinkActive="active-icon" class="sidebar-icon size-6 text-green-500" />
+          <h4 class="ml-[11px]">{{ item.label }}</h4>
+        </a>
+      </div>
+    }
+  </div>
+</div>

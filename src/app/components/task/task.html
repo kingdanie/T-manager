@@ -1,0 +1,24 @@
+<div class="task bg-slate-200 hover:bg-slate-300 shadow p-5 my-3 cursor-grab" (click)="viewTask(task())">
+  <h3 class="font-bold">{{ task().title }}</h3>
+  <p>{{ task().description }}</p>
+  <div class="mt-5 flex justify-between">          
+    <div class="flex items-center gap-1">
+      <mat-icon class="text-blue-400 font-bold">calendar_month</mat-icon> : 
+      <span class="text-sm">{{ task().dueDate }}</span>
+    </div>
+    <div class="flex cursor-pointer items-center">
+      @for (i of getExclamationCount(task().priority); track $index) {
+        <mat-icon 
+          size="small"
+          [matTooltip]="task().priority"
+          class="font-bold transition text-sm! w-2"
+          [class.text-red-500]="task().priority.toLowerCase() === 'urgent'"
+          [class.text-yellow-500]="task().priority.toLowerCase() === 'moderate'"
+          [class.text-blue-600]="task().priority.toLowerCase() === 'low'"
+        >
+          priority_high
+        </mat-icon>
+      }
+    </div>
+  </div>
+</div>
