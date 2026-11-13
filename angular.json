@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "T-manager2": {
+    "T-manager": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -45,7 +45,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumError": "40kB"
                 }
               ],
               "outputHashing": "all"
@@ -62,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "T-manager2:build:production"
+              "buildTarget": "T-manager:build:production"
             },
             "development": {
-              "buildTarget": "T-manager2:build:development"
+              "buildTarget": "T-manager:build:development"
             }
           },
           "defaultConfiguration": "development"
