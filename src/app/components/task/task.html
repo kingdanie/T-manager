@@ -11,7 +11,7 @@
         <mat-icon 
           size="small"
           [matTooltip]="task().priority"
-          class="font-bold transition text-sm! w-2"
+          class="font-bold transition text-sm! w-2!"
           [class.text-red-500]="task().priority.toLowerCase() === 'urgent'"
           [class.text-yellow-500]="task().priority.toLowerCase() === 'moderate'"
           [class.text-blue-600]="task().priority.toLowerCase() === 'low'"
