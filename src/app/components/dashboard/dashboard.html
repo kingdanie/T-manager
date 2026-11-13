@@ -1,106 +1,390 @@
-<!-- <div class="dashboard-container">
-    <app-nagivation></app-nagivation>
-    <div class="dashboard-content">
-    </div>
-  </div> -->
-  <div
-  class="grid md:grid-cols-2 gap-x-10 "
-  >
-    
-        
-        <div class="grid gap-y-5">
-            <div>
-                <h2 class="font-bold">Today</h2>
-                <small class="text-gray-500">{{ currentDate | date : 'EEE dd, yyy | hh:mm a' }}</small>
-            </div>
 
-            <div class="bg-gray-50 rounded-lg p-10 space-y-3">
-                <div class="flex justify-between">
-                    <h3 class="font-semibold">My Tasks</h3>
-                    <a class="text-blue-700 text-xs font-bold" href="/dashboard/tasks">
-                        View All
-                    </a>
-                </div>
+<div class="min-h-screen bg-[#F7F8FC] p-5 md:p-8">
 
-                <div class="flex gap-3 flex-col">
-                    @for (item of latestTasks(); track $index) {
-                        <div for="task" class="p-5 bg-white hover:bg-blue-600 flex justify-between rounded-lg w-full group">
-                           <div class="flex gap-x-2">
-                               <div class="text-gray-400 group-hover:text-gray-100">
-                                   0{{$index + 1}}
-                               </div>
-   
-                               <div class="group-hover:text-white">{{item.title}}</div>
-                           </div>
-                            <div class="self-end">
-                                <input type="radio" name="task">
-                            </div>
-                            
-                        </div>
-                    }
-                </div>
-            </div>
+  <!-- Dashboard Header -->
+  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
 
-            <div class="bg-gray-50 rounded-lg p-10">
-                <div class="flex justify-between">
-                    Activity
-                    <small class="text-blue-700 font-bold"> This week</small>
-                </div>
-                <div class="p-5 min-h-[170px] bg-white hover:bg-gray-100 cursor-not-allowed flex items-center justify-center">
-                    <h3 class="font-bold text-blue-700">
-                         Coming Soon
-                    </h3>
-                </div>
+    <div>
+      <p class="text-sm font-medium text-gray-500 mb-1">
+        {{ currentDate | date : 'EEEE, MMMM d, y' }}
+      </p>
 
-            </div>
-        </div>
-   
-    <div class="flex flex-col space-y-5">
-        <div class="flex items-center gap-x-4 bg-gray-50 rounded-lg p-5 max-h-[100px]">
-            <div class="flex items-center gap-x-2">
-                <img class="size-12 rounded-full" src={{user.pic}} alt="">          
-                <div>
-                    <h3 class="font-bold">
-                        {{user.name ?? ''}}
-                    </h3>
-                    <small> {{user.team ?? ''}}</small>
-                </div>
-            </div>
-            <span class="text-gray-400"></span>
-            
-        </div>
-        <div class="bg-gray-50 min-h-[350px] flex justify-center items-center p-5">
-                <h2 class="bg-white">Calendar Coming soon</h2>
+      <h1 class="text-3xl md:text-4xl font-bold text-slate-900">
+        Welcome back, {{ user.name ?? 'there' }}!
+        <span>👋</span>
+      </h1>
 
-        </div>
-        <div class="bg-gray-50 p-5 rounded-lg space-y-3 flex-1">
-            <div class="flex justify-between">
-                <div>
-                        Members
-                </div>
-                <a class="text-blue-700 text-xs font-bold" href="/dashboard/members">View All</a>
-            </div>
-            <div class="flex gap-3 flex-col">
-                @for (user of latestUsers(); track $index) {
-                    <div class="p-3 bg-white hover:bg-blue-900 flex rounded-lg w-full gap-x-3 items-center justify-between">
-
-                        <div class="flex gap-x-2">
-                        <div>
-                            <img class="h-8 w-8 rounded-full" src={{user.pic}} alt="">          
-                        </div>
-
-                        <div>{{user.name}} </div>
-                        </div>
-                        <div class="justify-self-end">
-                            
-                        </div>
-                        
-                    </div>
-                }
-            </div>
-
-        </div>
+      <p class="text-gray-500 mt-2">
+        Let's get things done today.
+      </p>
     </div>
 
- 
+    <!-- User Profile -->
+    <div class="bg-white border border-gray-100 shadow-sm rounded-2xl p-4 flex items-center gap-3 min-w-[250px]">
+
+      <div class="relative">
+        <img
+          class="w-14 h-14 rounded-full object-cover"
+          [src]="user.pic"
+          [alt]="user.name"
+        >
+
+        <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
+      </div>
+
+      <div class="min-w-0 flex-1">
+        <h3 class="font-bold text-slate-900 truncate">
+          {{ user.name ?? '' }}
+        </h3>
+        <p class="text-sm text-gray-500 truncate">
+          {{ user.team ?? '' }}
+        </p>
+      </div>
+
+      <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          stroke-width="2" d="m19 9-7 7-7-7"/>
+      </svg>
+
+    </div>
   </div>
+
+
+  <!-- Dashboard Grid -->
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
+
+    <!-- LEFT COLUMN -->
+    <div class="flex flex-col gap-5">
+
+      <!-- My Tasks -->
+      <section class="bg-white border border-gray-100 rounded-2xl p-5 md:p-6 shadow-sm">
+
+        <div class="flex items-center justify-between mb-6">
+
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-lime-100 text-green-700 flex items-center justify-center">
+
+              <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5-3v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h10"/>
+              </svg>
+
+            </div>
+
+            <h2 class="text-xl font-bold text-slate-900">
+              My Tasks
+            </h2>
+          </div>
+
+          <a
+            href="/dashboard/tasks"
+            class="text-sm font-semibold text-green-700 hover:text-green-900 flex items-center gap-2"
+          >
+            View All
+            <span>→</span>
+          </a>
+
+        </div>
+
+
+        <!-- Task List -->
+        <div class="flex flex-col gap-2">
+
+          @for (item of latestTasks(); track $index) {
+
+            <div
+              class="group flex items-center justify-between gap-3 p-4 border border-gray-100 rounded-xl hover:border-green-300 hover:bg-green-50/40 transition-all duration-200 cursor-pointer"
+            >
+
+              <div class="flex items-center gap-4 min-w-0">
+
+                <span class="flex-shrink-0 w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-sm font-semibold text-slate-600">
+                  {{ ($index + 1).toString().padStart(2, '0') }}
+                </span>
+
+                <h3 class="text-sm md:text-base font-medium text-slate-800 group-hover:text-green-800 truncate">
+                  {{ item.title }}
+                </h3>
+
+              </div>
+
+              <div class="flex items-center gap-3 flex-shrink-0">
+
+                <input
+                  type="checkbox"
+                  class="w-5 h-5 rounded-full accent-lime-500 cursor-pointer"
+                  [attr.aria-label]="'Mark ' + item.title + ' as complete'"
+                >
+
+                <button
+                  type="button"
+                  class="text-gray-400 hover:text-slate-700 p-1"
+                  aria-label="Task options"
+                >
+                  <svg class="w-5 h-5" fill="currentColor"
+                    viewBox="0 0 24 24">
+                    <circle cx="12" cy="5" r="1.8"/>
+                    <circle cx="12" cy="12" r="1.8"/>
+                    <circle cx="12" cy="19" r="1.8"/>
+                  </svg>
+                </button>
+
+              </div>
+
+            </div>
+
+          } @empty {
+
+            <div class="py-12 text-center">
+              <p class="text-gray-500 text-sm">No tasks available.</p>
+            </div>
+
+          }
+
+        </div>
+
+      </section>
+
+
+      <!-- Activity -->
+      <section class="bg-white border border-gray-100 rounded-2xl p-5 md:p-6 shadow-sm">
+
+        <div class="flex items-center justify-between mb-6">
+
+          <div class="flex items-center gap-3">
+
+            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+
+              <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12h4l3-9 4 18 3-9h4"/>
+              </svg>
+
+            </div>
+
+            <h2 class="text-xl font-bold text-slate-900">
+              Activity
+            </h2>
+
+          </div>
+
+          <button
+            type="button"
+            class="text-sm font-semibold text-purple-700 flex items-center gap-2"
+          >
+            This week
+            <svg class="w-4 h-4" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2" d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+
+        </div>
+
+        <div class="min-h-[150px] rounded-xl bg-gradient-to-br from-purple-50 to-indigo-50 flex flex-col items-center justify-center text-center p-6">
+
+          <div class="w-12 h-12 rounded-full bg-white text-purple-600 flex items-center justify-center mb-3">
+
+            <svg class="w-6 h-6" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+
+          </div>
+
+          <h3 class="font-bold text-slate-900">
+            No recent activity yet
+          </h3>
+
+          <p class="text-sm text-gray-500 mt-2">
+            Start working on your tasks to see updates here.
+          </p>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- RIGHT COLUMN -->
+    <div class="flex flex-col gap-5">
+
+      <!-- Calendar -->
+      <section class="bg-white border border-gray-100 rounded-2xl p-5 md:p-6 shadow-sm min-h-[350px]">
+
+        <div class="flex items-center justify-between">
+
+          <div class="flex items-center gap-3">
+
+            <div class="w-10 h-10 rounded-xl bg-lime-100 text-green-700 flex items-center justify-center">
+
+              <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+              </svg>
+
+            </div>
+
+            <h2 class="text-xl font-bold text-slate-900">
+              Calendar
+            </h2>
+
+          </div>
+
+          <button
+            type="button"
+            disabled
+            class="border border-green-500 text-green-800 px-4 py-2 rounded-full text-sm font-semibold opacity-70 cursor-not-allowed"
+          >
+            View Calendar →
+          </button>
+
+        </div>
+
+
+        <!-- Calendar Empty State -->
+        <div class="flex flex-col items-center justify-center text-center py-10">
+
+          <div class="relative mb-5">
+
+            <div class="w-28 h-24 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col overflow-hidden shadow-sm">
+
+              <div class="h-7 bg-lime-400 flex items-center justify-center">
+                <span class="text-xs font-bold text-green-900">CALENDAR</span>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2 p-3">
+                <span class="h-3 rounded bg-purple-100"></span>
+                <span class="h-3 rounded bg-purple-100"></span>
+                <span class="h-3 rounded bg-purple-100"></span>
+                <span class="h-3 rounded bg-purple-100"></span>
+                <span class="h-3 rounded bg-purple-100"></span>
+                <span class="h-3 rounded bg-purple-100"></span>
+              </div>
+
+            </div>
+
+            <div class="absolute -right-5 -bottom-3 w-12 h-12 rounded-full bg-lime-100 border-4 border-white flex items-center justify-center text-green-700">
+
+              <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" stroke-width="2"/>
+                <path stroke-linecap="round" stroke-width="2"
+                  d="M12 7v5l3 2"/>
+              </svg>
+
+            </div>
+
+          </div>
+
+          <h3 class="text-lg font-bold text-slate-900 mt-4">
+            Calendar Coming Soon
+          </h3>
+
+          <p class="text-sm text-gray-500 mt-2">
+            Your schedule and upcoming events will appear here.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- Members -->
+      <section class="bg-white border border-gray-100 rounded-2xl p-5 md:p-6 shadow-sm flex-1">
+
+        <div class="flex items-center justify-between mb-5">
+
+          <div class="flex items-center gap-3">
+
+            <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-800 flex items-center justify-center">
+
+              <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m6-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm10 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+
+            </div>
+
+            <h2 class="text-xl font-bold text-slate-900">
+              Members
+            </h2>
+
+          </div>
+
+          <a
+            href="/dashboard/members"
+            class="text-sm font-semibold text-green-700 hover:text-green-900 flex items-center gap-2"
+          >
+            View All →
+          </a>
+
+        </div>
+
+
+        <!-- Member List -->
+        <div class="flex flex-col">
+
+          @for (member of latestUsers(); track $index) {
+
+            <div class="flex items-center justify-between gap-3 py-3 border-t border-gray-100 first:border-t-0">
+
+              <div class="flex items-center gap-3 min-w-0">
+
+                <img
+                  class="w-11 h-11 rounded-full object-cover"
+                  [src]="member.pic"
+                  [alt]="member.name"
+                >
+
+                <div class="min-w-0">
+                  <h3 class="font-semibold text-sm text-slate-900 truncate">
+                    {{ member.name }}
+                  </h3>
+
+                  <p class="text-xs text-gray-500 mt-1">
+                    {{ member.team ?? 'Team Member' }}
+                  </p>
+                </div>
+
+              </div>
+
+              <span class="flex-shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-semibold">
+
+                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                Member
+
+              </span>
+
+            </div>
+
+          } @empty {
+
+            <div class="py-10 text-center text-sm text-gray-500">
+              No members available.
+            </div>
+
+          }
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </div>
+
+</div>
