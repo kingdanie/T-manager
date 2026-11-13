@@ -1,62 +1,181 @@
+
 <!-- Desktop Sidebar -->
-<div class="z-100 hidden lg:block container bg-white min-h-full 2xl:w-62.5 lg:w-48 drop-shadow-sm">
-  <!-- User / Logo -->
-  <div class="flex items-center pt-4 px-5">
-    <span class="font-bold text-blue-600 lg:text-lg 2xl:text-2xl">T-Manager</span>
-  </div>
+<aside class="hidden lg:flex fixed left-0 top-0 z-40 h-screen w-64 flex-col bg-white border-r border-gray-100">
 
-  <button class="lg:hidden absolute top-5 right-5" (click)="toggleSideMenu()">
-    <mat-icon class="text-gray-400 font-bold hover:ring-4 transition cursor-pointer">close</mat-icon>
-  </button>
+  <!-- Logo -->
+  <div class="h-[88px] flex items-center px-7 shrink-0">
 
-  <!-- Sidebar Items -->
-  <div class="mt-10.25">
-    @for (item of navbar_items; track item.link) {
-      <div class="mb-5">
-        <a
-          [routerLink]="item.link"
-          routerLinkActive="active"
-          class="flex items-center text-gray-500 2xl:text-[16px] text-[14px] py-0.5 px-5 hover:bg-blue-100"
-        >
-          <img [src]="item.icon" routerLinkActive="active-icon" class="sidebar-icon size-6 text-green-500" />
-          <h4 class="ml-2.75">{{ item.label }}</h4>
-        </a>
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-lime-400 flex items-center justify-center shadow-sm">
+        <span class="text-white text-2xl font-extrabold">T</span>
       </div>
-    }
-  </div>
-</div>
 
-<!-- Mobile Menu -->
-<div
-  class="container fixed lg:hidden bg-white min-h-full drop-shadow-sm w-full transition-all duration-300"
-  [ngClass]="{
-    'fixed z-50 left-0': isMobileMenu(),
-    'absolute top-0 -left-[100vw] h-full w-full': !isMobileMenu()
-  }"
->
-  <!-- User / Logo -->
-  <div class="flex items-center pt-4 px-5">
-    <span class="font-bold text-blue-600 text-lg">T-Manager</span>
+      <span class="text-xl font-extrabold tracking-tight text-slate-900">
+        T-Manager
+      </span>
+    </div>
+
   </div>
 
-  <button class="absolute top-5 right-5" (click)="toggleSideMenu()">
-    <mat-icon class="text-gray-400 font-bold hover:ring-4 transition cursor-pointer">close</mat-icon>
-  </button>
 
-  <!-- Sidebar Items -->
-  <div class="mt-10.25">
+  <!-- Navigation -->
+  <nav class="flex-1 px-4 pt-7">
+
+    <p class="px-4 mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">
+      Workspace
+    </p>
+
     @for (item of navbar_items; track item.link) {
-      <div class="mb-5">
-        <a
+
+      <a
+        [routerLink]="item.link"
+        routerLinkActive="bg-lime-50 text-green-800 font-semibold before:content-[''] before:absolute before:left-0 before:top-2 before:bottom-2 before:w-1 before:bg-lime-500 before:rounded-r-full"
+        [routerLinkActiveOptions]="{ exact: item.link === '/dashboard' }"
+        class="relative flex items-center gap-3 px-4 py-3 mb-2 rounded-xl text-gray-500 text-sm font-medium hover:bg-gray-50 hover:text-slate-900 transition-all duration-200 group"
+      >
+
+        <img
+          [src]="item.icon"
+          [alt]="item.label"
+          class="w-5 h-5 object-contain opacity-60 group-hover:opacity-100"
+        />
+
+        <span>{{ item.label }}</span>
+
+      </a>
+
+    }
+
+  </nav>
+
+
+  <!-- Sidebar Bottom Promotion -->
+  <div class="p-4 mt-auto">
+
+    <div class="rounded-2xl bg-gradient-to-br from-lime-50 to-green-50 p-5 text-center border border-lime-100">
+
+      <div class="text-3xl mb-3">
+        🚀
+      </div>
+
+      <h3 class="font-bold text-slate-900 text-sm">
+        Stay Productive
+      </h3>
+
+      <p class="text-xs text-gray-500 mt-2 leading-relaxed">
+        Plan, track and achieve more with T-Manager.
+      </p>
+
+    </div>
+
+    <p class="text-center text-[10px] text-gray-400 mt-5">
+      T-Manager Workspace
+    </p>
+
+  </div>
+
+</aside>
+
+
+<!-- Mobile Sidebar Overlay -->
+@if (isMobileMenu()) {
+
+  <div
+    class="fixed inset-0 z-50 lg:hidden"
+  >
+
+    <!-- Backdrop -->
+    <div
+      class="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"
+      (click)="closeSideMenu()"
+    ></div>
+
+
+    <!-- Mobile Drawer -->
+    <aside
+      class="absolute left-0 top-0 h-full w-[280px] max-w-[85vw] bg-white shadow-2xl flex flex-col animate-in slide-in-from-left duration-300"
+    >
+
+      <!-- Logo -->
+      <div class="h-[88px] px-6 flex items-center justify-between border-b border-gray-100">
+
+        <div class="flex items-center gap-3">
+
+          <div class="w-10 h-10 rounded-xl bg-lime-400 flex items-center justify-center">
+            <span class="text-white text-2xl font-extrabold">T</span>
+          </div>
+
+          <span class="text-xl font-extrabold text-slate-900">
+            T-Manager
+          </span>
+
+        </div>
+
+        <button
+          type="button"
           (click)="closeSideMenu()"
-          [routerLink]="item.link"
-          routerLinkActive="active"
-          class="flex items-center text-gray-500 2xl:text-[16px] text-[14px] py-0.5 px-5 hover:bg-blue-100"
+          class="w-9 h-9 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition"
+          aria-label="Close navigation"
         >
-          <img [src]="item.icon" routerLinkActive="active-icon" class="sidebar-icon size-6 text-green-500" />
-          <h4 class="ml-2.75">{{ item.label }}</h4>
-        </a>
+          <mat-icon>close</mat-icon>
+        </button>
+
       </div>
-    }
+
+
+      <!-- Navigation -->
+      <nav class="flex-1 px-4 pt-7">
+
+        <p class="px-4 mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">
+          Workspace
+        </p>
+
+        @for (item of navbar_items; track item.link) {
+
+          <a
+            (click)="closeSideMenu()"
+            [routerLink]="item.link"
+            routerLinkActive="bg-lime-50 text-green-800 font-semibold"
+            [routerLinkActiveOptions]="{ exact: item.link === '/dashboard' }"
+            class="flex items-center gap-3 px-4 py-3 mb-2 rounded-xl text-gray-500 text-sm font-medium hover:bg-gray-50 hover:text-slate-900 transition-all duration-200"
+          >
+
+            <img
+              [src]="item.icon"
+              [alt]="item.label"
+              class="w-5 h-5 object-contain opacity-70"
+            />
+
+            <span>{{ item.label }}</span>
+
+          </a>
+
+        }
+
+      </nav>
+
+
+      <!-- Bottom -->
+      <div class="p-4 mt-auto">
+
+        <div class="rounded-2xl bg-gradient-to-br from-lime-50 to-green-50 p-5 text-center border border-lime-100">
+
+          <div class="text-3xl mb-3">🚀</div>
+
+          <h3 class="font-bold text-slate-900 text-sm">
+            Stay Productive
+          </h3>
+
+          <p class="text-xs text-gray-500 mt-2">
+            Plan, track and achieve more.
+          </p>
+
+        </div>
+
+      </div>
+
+    </aside>
+
   </div>
-</div>
+
+}
