@@ -1,23 +1,48 @@
-<div class="flex h-screen overflow-y-hidden w-full">
-  <app-sidebar class="absolute lg:sticky lg:left-0 lg:top-0 h-[100%];"></app-sidebar>
 
-  <div class="overflow-y-scroll w-full">
-    <app-navbar class="sticky top-0 z-50"></app-navbar>
-    <div class="h-full overflow-y-auto py-4 text-[#393A4A] px-6 min-h-[80%] 2xl:w-[calc(100vw-250px)] w-full">
+<div class="flex h-screen w-full overflow-hidden bg-[#F7F8FC]">
+
+  <!-- Sidebar -->
+  <app-sidebar
+    class="hidden lg:block shrink-0 w-64 h-screen"
+  ></app-sidebar>
+
+
+  <!-- Main Application Area -->
+  <div class="flex flex-col flex-1 min-w-0 h-screen overflow-hidden">
+
+    <!-- Navbar -->
+    <app-navbar
+      class="sticky top-0 z-40 shrink-0"
+    ></app-navbar>
+
+
+    <!-- Page Content -->
+    <main
+      class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-5 py-6 md:px-8 md:py-8 text-[#393A4A]"
+    >
+
       <router-outlet></router-outlet>
-    </div>
+
+    </main>
+
   </div>
 
+
+  <!-- Modals -->
   @if (modalService.taskModal) {
     <app-task-modal></app-task-modal>
   }
+
   @if (modalService.deleteTaskModal) {
     <app-delete-modal></app-delete-modal>
   }
+
   @if (modalService.createTaskModal) {
     <app-create-modal></app-create-modal>
   }
+
   @if (modalService.editTaskModal) {
     <app-edit-modal></app-edit-modal>
   }
+
 </div>
