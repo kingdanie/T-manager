@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -23,6 +24,8 @@ import { MobileMenuService } from '../../services/mobile-menu-service';
   templateUrl: './navbar.html',
 })
 export class Navbar implements OnInit {
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
   private _modalServer = inject(ModalService);
   private router = inject(Router);
   private auth = inject(AuthService);
@@ -31,6 +34,7 @@ export class Navbar implements OnInit {
   user: any = null;
 
   ngOnInit(): void {
+    if (this.isBrowser) {
     const userData = localStorage.getItem('userInfo');
     if (userData) {
       try {
@@ -39,7 +43,7 @@ export class Navbar implements OnInit {
         this.router.navigate(['/login']);
         console.error('Error parsing user data from local storage:', error);
       }
-    }
+    }}
   }
 
   createTask(): void {
