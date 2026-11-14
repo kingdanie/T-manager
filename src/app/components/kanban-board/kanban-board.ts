@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, computed } from '@angular/core';
+import { Component, inject, OnInit, computed, signal } from '@angular/core';
 import { TaskService } from '../../services/task-service';
 import { Task } from '../../interfaces/task';
 import { 
@@ -12,7 +12,7 @@ import {
 import { TaskComponent } from '../task/task';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-// import { NgSelectComponent } from '@ng-select/ng-select';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   imports: [
@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
     CdkDropList, 
     CdkDrag, 
     FormsModule,
-    // NgSelectComponent,
+    NgSelectComponent,
   ],
   selector: 'app-kanban-board',
   standalone: true,
@@ -32,7 +32,7 @@ import { FormsModule } from '@angular/forms';
 export class KanbanBoard implements OnInit {
   private taskService = inject(TaskService);
 
-  statusQuery: string = 'Priority';
+  statusQuery = signal<string | null>(null);
 
   // Reactive columns using Angular computed signals based on the service's task signal
   openTasks = computed(() => {
@@ -63,13 +63,25 @@ export class KanbanBoard implements OnInit {
     // With signals, initial loading happens automatically through the service
   }
 
+  // private applyPriorityFilter(tasks: Task[]): Task[] {
+  //   if (!this.statusQuery || this.statusQuery.toLowerCase() === 'priority') {
+  //     return tasks;
+  //   }
+  //   const filterStatus = this.statusQuery.toLowerCase();
+  //   return tasks.filter(task => task.priority?.toLowerCase() === filterStatus);
+  // }
+
   private applyPriorityFilter(tasks: Task[]): Task[] {
-    if (!this.statusQuery || this.statusQuery.toLowerCase() === 'priority') {
-      return tasks;
-    }
-    const filterStatus = this.statusQuery.toLowerCase();
-    return tasks.filter(task => task.priority?.toLowerCase() === filterStatus);
+  const priority = this.statusQuery();
+
+  if (!priority) {
+    return tasks;
   }
+
+  return tasks.filter(
+    task => task.priority?.toLowerCase() === priority.toLowerCase()
+  );
+}
 
   // Kept as an empty method or trigger if bound directly to ng-select change events
   filterTasks(): void {

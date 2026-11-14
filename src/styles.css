@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+@import "@ng-select/ng-select/themes/default.theme.css";
 
 html, body { 
   height: 100%; 
@@ -18,3 +18,25 @@ mat-icon.text-blue-400 {
 mat-icon.text-red-500 { color: #ef4444 !important; }
 mat-icon.text-yellow-500 { color: #eab308 !important; }
 mat-icon.text-blue-600 { color: #2563eb !important; }
+
+:host ::ng-deep .custom-priority-select .ng-select-container {
+  background-color: #eff6ff;
+  border: none;
+  border-radius: 8px;
+  min-height: 36px;
+  box-shadow: none;
+}
+
+:host ::ng-deep .custom-priority-select .ng-value {
+  font-size: 12px;
+  color: #374151;
+}
+
+:host ::ng-deep .custom-priority-select .ng-placeholder {
+  font-size: 12px;
+  color: #374151;
+}
+
+:host ::ng-deep .custom-priority-select .ng-arrow-wrapper {
+  display: none;
+}
