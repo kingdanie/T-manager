@@ -11,8 +11,8 @@ body {
   /* font-family: Roboto, "Helvetica Neue", sans-serif;  */
 }
 
-mat-icon.text-blue-400 {
-  color: var(--color-blue-400, #60a5fa) !important;
+mat-icon.text-green-700 {
+  color: var(--color-green-700, #00cc2c) !important;
 }
 
 mat-icon.text-red-500 { color: #ef4444 !important; }
