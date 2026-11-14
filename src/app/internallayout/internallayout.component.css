@@ -1,4 +1,0 @@
-.sidebar {
-    @apply absolute lg:sticky lg:left-0 lg:top-0 h-[100%];
-    z-index: 100;
-}

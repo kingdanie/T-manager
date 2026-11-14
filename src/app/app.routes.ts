@@ -1,25 +1,26 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
-import { InternallayoutComponent } from './internallayout/internallayout.component';
-import { MembersComponent } from './components/members/members.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { AuthGuard } from './auth-guard.guard';
-import { loginGuardGuard } from './login-guard.guard';
+import { Login } from './components/login/login';
+import { Dashboard } from './components/dashboard/dashboard';
+import { KanbanBoard } from './components/kanban-board/kanban-board';
+import { Internallayout } from './internallayout/internallayout';
+import { Members } from './components/members/members';
+import { Settings } from './components/settings/settings';
+import { authGuard } from './auth-guard-guard';
+import { loginGuardGuard } from './login-guard-guard';
+
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' }, // Set Login as default
-    { path: 'login', component: LoginComponent, canActivate: [ loginGuardGuard ] },
+    { path: 'login', component: Login, canActivate: [ loginGuardGuard ] },
     {
         path: 'dashboard',
-        component: InternallayoutComponent,
-        canActivate: [ AuthGuard ],
+        component: Internallayout,
+        canActivate: [ authGuard ],
         children: [
-          { path: '', component: DashboardComponent },
-          { path: 'tasks', component: KanbanBoardComponent },
-          { path: 'members', component: MembersComponent }, 
-          { path: 'settings', component: SettingsComponent } 
+          { path: '', component: Dashboard },
+          { path: 'tasks', component: KanbanBoard },
+          { path: 'members', component: Members }, 
+          { path: 'settings', component: Settings } 
         ]
       },
 ];

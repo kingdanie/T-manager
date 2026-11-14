@@ -1,0 +1,76 @@
+<div class="my-3">
+  <div class="max-w-40">
+    <ng-select
+      [searchable]="false"
+      [clearable]="false"
+      [multiple]="false"
+      [items]="['Urgent', 'Moderate', 'Low']"
+      [ngModel]="statusQuery()"
+      (ngModelChange)="statusQuery.set($event)"
+      placeholder="Filter By Priority"
+      class="custom-priority-select"
+    >
+    </ng-select>
+  </div>
+</div>
+
+<!-- <div class="my-3">
+  <div class="bg-[#F7F8FC] px-3 py-1 rounded-[8px] max-w-[160px]">
+    <select
+      [(ngModel)]="statusQuery"
+      (change)="filterTasks()"
+      class="text-[12px] bg-transparent min-w-[110px] outline-none border-none text-sm text-gray-700 cursor-pointer w-full py-1"
+    >
+      <option value="" disabled selected>Filter By Priority</option>
+      <option value="Priority">Priority</option>
+      <option value="Urgent">Urgent</option>
+      <option value="Moderate">Moderate</option>
+      <option value="Low">Low</option>
+    </select>
+  </div>
+</div> -->
+<div class="kanban-board bg-slate-50 p-3 overflow-y-auto flex gap-2" cdkDropListGroup>
+  <div class="kanban-column" id="openTasks" cdkDropList [cdkDropListData]="openTasks()" (cdkDropListDropped)="drop($event)">
+    <h2 class="flex items-center gap-2 uppercase text-gray-700 font-semibold">
+      Open <span class="text-xs rounded-full py-0.5 px-1.5 text-white bg-gray-700">{{ openTasks().length }}</span>
+    </h2>
+    @for (task of openTasks(); track task.id) {
+      <div class="kanban-task" cdkDrag>
+        <app-task [task]="task"></app-task>
+      </div>
+    }
+  </div>
+
+  <div class="kanban-column" id="pendingTasks" cdkDropList [cdkDropListData]="pendingTasks()" (cdkDropListDropped)="drop($event)">
+    <h2 class="flex items-center gap-2 uppercase text-blue-700 font-semibold">
+      Pending <span class="text-xs rounded-full py-0.5 px-1.5 text-white bg-blue-700">{{ pendingTasks().length }}</span>
+    </h2>
+    @for (task of pendingTasks(); track task.id) {
+      <div class="kanban-task" cdkDrag>
+        <app-task [task]="task"></app-task>
+      </div>
+    }
+  </div>
+
+  <div class="kanban-column" id="inProgressTasks" cdkDropList [cdkDropListData]="inProgressTasks()" (cdkDropListDropped)="drop($event)">
+    <h2 class="flex items-center gap-2 uppercase text-yellow-500 font-semibold">
+      In Progress <span class="text-xs rounded-full py-0.5 px-1.5 text-white bg-yellow-500">{{ inProgressTasks().length }}</span>
+    </h2>
+    @for (task of inProgressTasks(); track task.id) {
+      <div class="kanban-task" cdkDrag>
+        <app-task [task]="task"></app-task>
+      </div>
+    }
+  </div>
+
+  <div class="kanban-column" id="completedTasks" cdkDropList [cdkDropListData]="completedTasks()" (cdkDropListDropped)="drop($event)">
+    <h2 class="flex items-center  gap-2 uppercase text-green-700 font-semibold">
+      Complete <span class="text-xs rounded-full py-0.5 px-1.5 text-white bg-green-700">{{ completedTasks().length }}</span>
+    </h2>
+    @for (task of completedTasks(); track task.id) {
+      <div class="kanban-task" cdkDrag>
+        <app-task [task]="task"></app-task>
+      </div>
+    }
+  </div>
+</div>

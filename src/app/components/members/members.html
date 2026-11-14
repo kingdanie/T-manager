@@ -1,0 +1,16 @@
+<app-page-header [titles]="['People']"></app-page-header>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-5 p-5">
+    @for (member of members; track $index) {
+        <div class="bg-gray-100 hover:bg-lime-200 hover:text-green-800 relative p-5 rounded-2xl flex flex-col justify-center items-center min-h-[250px] group">
+            <div (click)="deleteUser(member.id)" class="absolute top-2 right-2 text-gray-500 p-3 cursor-pointer hover:bg-red-500 hover:rounded-full group-hover:text-white"> 
+                <img src="icons/close.svg" class="size-4" alt="" />
+            </div>
+            
+            <div class="mb-3">
+                <img class="size-10 rounded-full" src={{member.pic}} alt="">          
+            </div>
+            <p class="text-gray-800 font-bold group-hover:text-green-900"> {{member.name}} </p>
+            <small class="text-gray-400 group-hover:text-green-800"> {{member.team}}</small>
+        </div>
+    }
+</div>

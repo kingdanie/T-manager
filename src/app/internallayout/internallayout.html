@@ -1,0 +1,48 @@
+
+<div class="flex h-screen w-full overflow-hidden bg-[#F7F8FC]">
+
+  <!-- Sidebar -->
+  <app-sidebar
+    class="hidden lg:block shrink-0 w-64 h-screen"
+  ></app-sidebar>
+
+
+  <!-- Main Application Area -->
+  <div class="flex flex-col flex-1 min-w-0 h-screen overflow-hidden">
+
+    <!-- Navbar -->
+    <app-navbar
+      class="sticky top-0 z-40 shrink-0"
+    ></app-navbar>
+
+
+    <!-- Page Content -->
+    <main
+      class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-5 py-6 md:px-8 md:py-8 text-[#393A4A]"
+    >
+
+      <router-outlet></router-outlet>
+
+    </main>
+
+  </div>
+
+
+  <!-- Modals -->
+  @if (modalService.taskModal) {
+    <app-task-modal></app-task-modal>
+  }
+
+  @if (modalService.deleteTaskModal) {
+    <app-delete-modal></app-delete-modal>
+  }
+
+  @if (modalService.createTaskModal) {
+    <app-create-modal></app-create-modal>
+  }
+
+  @if (modalService.editTaskModal) {
+    <app-edit-modal></app-edit-modal>
+  }
+
+</div>
