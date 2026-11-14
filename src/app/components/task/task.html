@@ -1,24 +1,59 @@
-<div class="task bg-slate-200 hover:bg-slate-300 shadow p-5 my-3 cursor-grab" (click)="viewTask(task())">
-  <h3 class="font-bold">{{ task().title }}</h3>
-  <p>{{ task().description }}</p>
-  <div class="mt-5 flex justify-between">          
-    <div class="flex items-center gap-1">
-      <mat-icon class="text-blue-400 font-bold">calendar_month</mat-icon> : 
-      <span class="text-sm">{{ task().dueDate }}</span>
+
+<div
+  class="bg-white border border-gray-100 rounded-xl p-5 my-3 space-y-3
+         shadow-sm cursor-grab
+         hover:border-lime-300 hover:shadow-md
+         hover:bg-lime-50/30
+         transition-all duration-200 group"
+  (click)="viewTask(task())"
+>
+
+  <!-- Task Title -->
+  <div class="flex items-start justify-between gap-3">
+
+    <h3 class="font-semibold text-slate-800 text-sm md:text-base leading-5
+               group-hover:text-green-800 transition-colors">
+      {{ task().title }}
+    </h3>
+
+  </div>
+
+
+  <!-- Description -->
+  <p class="text-sm text-slate-500 mt-2 leading-relaxed line-clamp-3">
+    {{ task().description }}
+  </p>
+
+
+  <!-- Footer -->
+  <div class="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between gap-3">
+
+    <!-- Due Date -->
+    <div class="flex items-center gap-2 text-slate-500">
+      <mat-icon class="text-green-700 text-[18px]! w-4.5! h-4.5!">
+        calendar_month
+      </mat-icon>
+      <span class="text-xs font-medium">
+        {{ task().dueDate }}
+      </span>
     </div>
-    <div class="flex cursor-pointer items-center">
+
+
+    <!-- Priority -->
+    <div class="flex items-center gap-0.5 px-2 py-0.5 rounded-lg">
+
       @for (i of getExclamationCount(task().priority); track $index) {
-        <mat-icon 
-          size="small"
+        <mat-icon
           [matTooltip]="task().priority"
-          class="font-bold transition text-sm! w-2!"
+          class="text-4! w-3! h-4! leading-2.5! font-bold"
           [class.text-red-500]="task().priority.toLowerCase() === 'urgent'"
-          [class.text-yellow-500]="task().priority.toLowerCase() === 'moderate'"
-          [class.text-blue-600]="task().priority.toLowerCase() === 'low'"
+          [class.text-amber-500]="task().priority.toLowerCase() === 'moderate'"
+          [class.text-blue-500]="task().priority.toLowerCase() === 'low'"
         >
           priority_high
         </mat-icon>
       }
+
     </div>
   </div>
 </div>
